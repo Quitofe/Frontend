@@ -54,18 +54,14 @@ export class CategoriaComponent implements OnInit {
         this.dialog_visible = false;
         this.getCategorias();
         this.categoria_id = -1
-
-        Swal.fire({
-          title: "Good Job",
-          text: "¡You clicked the buttom!",
-          icon: "success"
-        })
+        this.alerta("ACTUALIZADO", "¡La Categoría se actualizó con éxito!", "success")
       },
       (error:any) =>{
-        console.log(error);
+        this.alerta("ERROR!",  "Error al intentar actualizar.", "error");
       }
     
-    )
+    );
+    this.categoriaForm.reset();
   }
   else{
   this.categoriaService.funGuardar(this.categoriaForm.value).subscribe(
@@ -73,14 +69,10 @@ export class CategoriaComponent implements OnInit {
       this.dialog_visible = false;
       this.getCategorias();
 
-      Swal.fire({
-        title: "REGISTRADO",
-        text: "¡La Categoría se creo con éxito!",
-        icon: "success"
-      })
+      this.alerta("REGISTRADO", "¡La Categoría se creo con éxito!", "success")
     },
     (error:any) =>{
-      console.log(error);
+      this.alerta("ERROR!",  "Error al intentar guardar.", "error");
     }
   )
   }
@@ -123,9 +115,6 @@ export class CategoriaComponent implements OnInit {
   }
   alerta(title:string, text:string, icon:'success'|'error'|'info'|'question'){
     Swal.fire({ title, text, icon});
-      // title: title,
-      // text: text,
-      // icon: icon
 
   }
 
